@@ -10,8 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthGuard } from './guards/auth.guard';
 import { PassportLocalGuard } from './guards/passport.guard';
+import { PassportJwtAuthGuard } from './guards/passport-jwt.guard';
 
 @Controller('auth-v2')
 export class PassportAuthController {
@@ -26,8 +26,8 @@ export class PassportAuthController {
   }
 
   @Get('me')
-  @UseGuards(AuthGuard)
+  @UseGuards(PassportJwtAuthGuard)
   getUserInfo(@Request() request) {
-    
+    return request.user;
   }
 }
